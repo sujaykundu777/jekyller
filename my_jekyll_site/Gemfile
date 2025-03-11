@@ -8,8 +8,11 @@ source "https://rubygems.org"
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
 
-# Jekyll version (3.9.3 is supported by github-pages gem)
-gem 'jekyll', '~> 3.9.3'
+# Jekyll version (3.9.3 is supported by github-pages gem) 
+# but you dont need to uncomment here pages-gem will take care
+# for jekyll version on bundle install
+
+# gem 'jekyll', '~> 3.9.3'
 # gem "jekyll", "~> 4.3.4"
 
 
