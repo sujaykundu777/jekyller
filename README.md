@@ -18,6 +18,7 @@ GCC and Make
 GitHub Pages is powered by Jekyll, a static site generator, meaning sites deployed using GitHub Pages are built using Jekyll
 
 [Github Pages Gem](https://github.com/github/pages-gem)
+[Githup Pages Dependencies versions](https://pages.github.com/versions/)
 
 GitHub Pages currently uses Jekyll version 3.9.3, as the "github-pages" gem bundles that version
 
@@ -231,10 +232,92 @@ Configuration file: /src/site/_config.yml
  Kramdown Parser - [kramdown-parser-gfm](https://github.com/kramdown/parser-gfm)
  GFM - [Github Flavoured Markdown](https://github.github.com/gfm/)
 
+ ### Syntax Highlighter  
+
+Jekyll has built in support for syntax highlighting of over 100 languages thanks to Rouge. Rouge is the default highlighter in Jekyll 3 and above.
+
+ Rouge - [Rouge](https://rouge.jneen.net/)
+ Rouge Wiki - [List of supported languages and lexers](https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers)
+
+ To render a code block with syntax highlighting, surround your code as follows:
+
+```yaml
+{% highlight ruby %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+```
+
+The argument to the highlight tag (ruby in the example above) is the language identifier. To find the appropriate identifier to use for the language you want to highlight, look for the “short name” on the Rouge wiki.
+
   ### Theme Configurations
 
   You can switch to supported themes list here  -  [pages.github.com/themes](https://pages.github.com/themes)
 
 By default it comes with the theme [Minimal](https://pages-themes.github.io/minimal)
 
+### Deploying the site to Github pages
 
+[Creating a GitHub Pages site with Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll)
+
+
+### Creating a custom jekyll site
+
+Create a new directory for your site 
+
+create a `Gemfile` locally
+
+Gemfile -> if jekyll doesnt install locally, you might need to create a Gemfile and do bundle install, to install all the gems defined in the Gemfile
+
+Gemfile
+```ruby
+source "https://rubygems.org"
+
+gem "github-pages", group: :jekyll_plugins
+
+```
+
+and install the gems :
+
+```sh
+bundle install
+bundle exec jekyll -v # jekyll 3.10.0
+```
+
+create a new directory 'docs' to host our site
+
+```sh
+bundle exec new docs
+cd docs 
+bundle install
+bundle exec jekyll serve  # to test the site locally
+```
+update _config.yml and posts in _posts directory
+
+### Create a new github repo for the jekyll site
+
+Once done, you can push to your github USERNAME.github.io repository. So create a new repo with USERNAME.github.io ->  Replace the USERNAME with your github username
+
+Go the repo settings,
+
+1. Change Default Branch -> gh-pages
+2. Go to pages, enable pages and source -> Deploy from a branch, Branch -> gh-pages, Directory -> /docs. Press Save.
+
+Now github will automatically build your jekyll site whenever you push to gh-pages branch.
+
+### Pushing local changes to github
+
+# Creates a new branch, with no history or contents, called gh-pages, and switches to the gh-pages branch
+`git checkout --orphan gh-pages`
+
+# Removes the contents from your default branch from the working directory
+`git rm -rf .`
+
+
+```sh
+git add .
+git commit -m 'Initial GitHub pages site with Jekyll'
+git remote add origin https://github.com/USER/USERNAME.github.io.git
+git push -u origin gh-pages
+```
