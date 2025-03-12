@@ -8,10 +8,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 #
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
+
 # Site settings
 # These are used to personalize your new site. If you look in the HTML files,
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
@@ -53,3 +50,15 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# Jekyll 3 now only supports kramdown for markdown
+markdown: kramdown
+kramdown:
+  # input: GFM
+  gfm_quirks: [paragraph_end]
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+     css_class: "highlight"
+
+
+     

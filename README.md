@@ -3,7 +3,15 @@
 Learn to build and host jekyll based sites using github actions and pages. Step-by-step instructions for begineers wanting to understand on how to use it.
 
 ### Jekyll
+Jekyll is a static site generator. It takes text written in your favorite markup language and uses layouts to create a static website. You can tweak the site’s look and feel, URLs, the data displayed on the page, and more. 
 
+For more info: [Jekyll Homepage](https://jekyllrb.com/)
+
+Jekyll requires the following:
+
+Ruby version 2.7.0 or higher
+RubyGems
+GCC and Make
 
 ### Github Pages
 
@@ -32,6 +40,7 @@ ruby 3.3.4 (2024-07-09 revision be1089c8ec) [arm64-darwin23]
 `gem install bundler`
 `gem update bundler`
 `gem pristine --all`
+`gem install kramdown`
 
 Important: Make sure you have Bundler > v1.14 by running gem update bundler in your terminal before following the next steps.
 
@@ -72,10 +81,13 @@ bundle install
 ```
 
 ### To start your local server
-bundle exec jekyll serve
+`bundle exec jekyll serve`
 
 ### To build your site
-bundle exec jekyll build
+`bundle exec jekyll build`
+
+### Liquid profiler
+`bundle exec jekyll serve --profile`
 
 ### check local version of jekyll: 
 `gem list jekyll`
@@ -205,3 +217,24 @@ Configuration file: /src/site/_config.yml
     Server address: http://0.0.0.0:4000/
   Server running... press ctrl-c to stop.
   ```
+
+  ### Yaml
+# If you need help with YAML syntax, here are some quick references for you:
+
+ https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+
+ YAML - [Yaml](https://learnxinyminutes.com/yaml/)
+
+  ### Markdown Configurations
+
+ Kramdown - [Kramdown](https://kramdown.gettalong.org/)
+ Kramdown Parser - [kramdown-parser-gfm](https://github.com/kramdown/parser-gfm)
+ GFM - [Github Flavoured Markdown](https://github.github.com/gfm/)
+
+  ### Theme Configurations
+
+  You can switch to supported themes list here  -  [pages.github.com/themes](https://pages.github.com/themes)
+
+By default it comes with the theme [Minimal](https://pages-themes.github.io/minimal)
+
+
