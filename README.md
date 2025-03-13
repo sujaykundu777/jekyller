@@ -264,6 +264,8 @@ By default it comes with the theme [Minimal](https://pages-themes.github.io/mini
 
 ### Creating a custom jekyll site
 
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
 Create a new directory for your site 
 
 create a `Gemfile` locally
@@ -294,6 +296,71 @@ bundle install
 bundle exec jekyll serve  # to test the site locally
 ```
 update _config.yml and posts in _posts directory
+
+comment the theme gems in Gemfile 
+comment the theme key in config.yml
+
+create _layouts/default.html file add this :
+
+```
+ <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{{site.title}} - {{ page.title }}</title>
+        <link rel="stylesheet" href="{{ '/style.css' | relative_url }}"> 
+    </head>
+    <body>
+        <header>
+            <!-- Header content -->
+        </header>
+        <main>
+            {{ content }}
+        </main>
+        <footer>
+            <!-- Footer content -->
+        </footer>
+    </body>
+    </html>
+```
+
+#### Create a Homepage :
+
+in the index.html file, update it to :
+```
+---
+title: Homepage
+layout: default
+---
+ 
+<div>
+    <h1>Hello, world!</h1>
+</div>
+
+```
+Now, if you run :
+
+```sh
+bundle exec jekyll serve --watch
+```
+You should see -> Hello, world!
+
+#### Creating stylesheet:
+
+create a new file style.css in assets/css/style.css
+
+```css
+h1 {
+    color: #0077cc;
+}
+```
+
+and update the path of stylesheet in /layouts/default.html to this:
+
+```
+       <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}"> 
+```
+
+You should now see that all h1's got their color changed to blue #0077cc. Cool your styles are working.
 
 ### Create a new github repo for the jekyll site
 
