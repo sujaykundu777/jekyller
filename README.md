@@ -198,11 +198,13 @@ github-pages <YOUR_JEKYLL_SITE_DIR_PATH>
 ```
 replace `YOUR_JEKYLL_SITE_DIR_PATH` with the jekyll project path, eg.
 
-`github pages /Users/sujaykundu/Downloads/projects/jekyller/my_jekyll_site`
+```sh
+github pages /Users/sujaykundu/Downloads/projects/jekyller/my_jekyll_site
+```
 
 This should run the serve the site:
 
-```s
+```sh
 fatal: detected dubious ownership in repository at '/src/gh/pages-gem'
 To add an exception for this directory, call:
 
@@ -220,7 +222,7 @@ Configuration file: /src/site/_config.yml
   ```
 
   ### Yaml
-# If you need help with YAML syntax, here are some quick references for you:
+#### If you need help with YAML syntax, here are some quick references for you:
 
  https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 
@@ -264,7 +266,7 @@ By default it comes with the theme [Minimal](https://pages-themes.github.io/mini
 
 ### Creating a custom jekyll site
 
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+#### To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 Create a new directory for your site 
 
@@ -362,6 +364,121 @@ and update the path of stylesheet in /layouts/default.html to this:
 
 You should now see that all h1's got their color changed to blue #0077cc. Cool your styles are working.
 
+#### Adding Data Files
+
+you can create data files with yml, json, csv and tsv format. create a directory _data 
+
+for example:  List of members:
+
+in yml format, In _data/members.yml: :
+
+```yml
+- name: Eric Mill
+  github: konklone
+
+- name: Parker Moore
+  github: parkr
+
+- name: Liu Fengyun
+  github: liufengyun
+  ```
+
+in json format, In _data/members.json :
+
+```json 
+[
+  {
+    "name": "Eric Mill",
+    "github": "konklone"
+  },
+  {
+    "name": "Parker Moore",
+    "github": "parkr"
+  },
+  {
+    "name": "Liu Fengyun",
+    "github": "liufengyun"
+  }
+]
+
+in csv format, In _data/members.csv :
+
+```csv
+name,github
+Eric Mill,konklone
+Parker Moore,parkr
+Liu Fengyun,liufengyun
+```
+
+in tsv format, In _data/members.tsv :
+
+```tsv
+name  github
+Eric Mill konklone
+Parker Moore parkr
+Liu Fengyun liufengyun
+```
+
+This data can be accessed via site.data.members (notice that the file’s basename determines the variable name and therefore one should avoid having data files with the same basename but different extensions, in the same directory).
+
+You can now render the list of members in a template:
+
+```js
+<ul>
+{% for member in site.data.members %}
+  <li>
+    <a href="https://github.com/{{ member.github }}">
+      {{ member.name }}
+    </a>
+  </li>
+{% endfor %}
+</ul>
+```
+
+You can also create subfolders 
+
+Data files can also be placed in sub-folders of the _data folder. Each folder level will be added to a variable’s namespace. The example below shows how GitHub organizations could be defined separately in a file under the orgs folder:
+
+In _data/orgs/jekyll.yml:
+
+```yml
+username: jekyll
+name: Jekyll
+members:
+  - name: Tom Preston-Werner
+    github: mojombo
+
+  - name: Parker Moore
+    github: parkr
+````
+
+In _data/orgs/doeorg.yml:
+
+```yml
+username: doeorg
+name: Doe Org
+members:
+  - name: John Doe
+    github: jdoe
+```
+
+The organizations can then be accessed via site.data.orgs, followed by the file name:
+
+```js
+<ul>
+{% for org_hash in site.data.orgs %}
+{% assign org = org_hash[1] %}
+  <li>
+    <a href="https://github.com/{{ org.username }}">
+      {{ org.name }}
+    </a>
+    ({{ org.members | size }} members)
+  </li>
+{% endfor %}
+</ul>
+```
+
+
 ### Create a new github repo for the jekyll site
 
 Once done, you can push to your github USERNAME.github.io repository. So create a new repo with USERNAME.github.io ->  Replace the USERNAME with your github username
@@ -375,10 +492,10 @@ Now github will automatically build your jekyll site whenever you push to gh-pag
 
 ### Pushing local changes to github
 
-# Creates a new branch, with no history or contents, called gh-pages, and switches to the gh-pages branch
+#### Creates a new branch, with no history or contents, called gh-pages, and switches to the gh-pages branch
 `git checkout --orphan gh-pages`
 
-# Removes the contents from your default branch from the working directory
+#### Removes the contents from your default branch from the working directory
 `git rm -rf .`
 
 
