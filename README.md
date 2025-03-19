@@ -364,7 +364,96 @@ and update the path of stylesheet in /layouts/default.html to this:
 
 You should now see that all h1's got their color changed to blue #0077cc. Cool your styles are working.
 
-#### Adding Data Files
+### Liquid 
+
+Jekyll uses liquid language - https://shopify.github.io/liquid
+
+Using for loop:
+
+You can loop a collection (about that below on how to create collections ) :
+
+Suppose we have a collection of products in json format :
+
+```json
+[
+  {
+    "title": "hat",
+    "price": "100"
+  },
+  {
+    "title": "shirt",
+    "price": "300"
+  },
+  {
+    "title": "pant",
+    "price": "800"
+  }
+]
+
+```
+
+```js
+{% for product in collection.products %}
+  {{ product.title }}
+{% endfor %}
+```
+will display :
+
+```js
+hat shirt pant
+```
+You can learn more about iterations [here](https://shopify.github.io/liquid/tags/iteration/)
+
+Using if else :
+
+```js
+{% for i in (1..5) %}
+  {% if i == 4 %}
+      {% break %}
+  {% else %}
+    {{ i }}
+  {% endif %}
+{% endfor %}
+```
+
+will display:
+
+```js
+1 2 3
+```
+
+forloop(object) has the following structure :
+
+```json
+{
+  "first": true,
+  "index": 1,
+  "index0": 0,
+  "last": false,
+  "length": 4,
+  "rindex": 3
+}
+```
+
+Checking last index of for loop 
+
+For example, if we want to add a , for every product but after the last product it should not show the comma (,) in that case you have iterate and find the last index and use unless.
+
+```jsx
+ {% for product in products %}
+      {%- if product.length > 0 -%}
+          {{ product.title }}{% unless forloop.last %} , {% endunless -%}
+      {%- endif -%}
+  {% endfor %}
+```
+
+will display: 
+
+```js
+hat, shirt, pant
+```
+
+#### Adding Data Files (collections)
 
 you can create data files with yml, json, csv and tsv format. create a directory _data 
 
@@ -477,6 +566,8 @@ The organizations can then be accessed via site.data.orgs, followed by the file 
 {% endfor %}
 </ul>
 ```
+
+
 
 
 ### Create a new github repo for the jekyll site
