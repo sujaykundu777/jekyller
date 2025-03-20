@@ -453,6 +453,35 @@ will display:
 hat, shirt, pant
 ```
 
+#### Including templates
+
+we can create templates by adding the files in _includes folder :
+
+lets create a file called footer.html inside _includes folder:
+
+```html
+
+<h1> footer goes here </h1>
+
+
+```
+Now suppose we want to call the footer template from homepage (index.html)
+
+In `index.html` you can call the template like this, and the footer will be processed :
+
+```html
+<div id="main">
+  <h1> Homepage </h1>
+</div>
+<div id="footer">
+  {% include footer.html %}
+</div>
+```
+
+Including files relative to another filePermalink
+
+{% include_relative somedir/footer.html %}
+
 #### Adding Data Files (collections)
 
 you can create data files with yml, json, csv and tsv format. create a directory _data 
