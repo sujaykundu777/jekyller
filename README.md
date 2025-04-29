@@ -36,10 +36,41 @@ ruby 3.3.4 (2024-07-09 revision be1089c8ec) [arm64-darwin23]
 
 - Bundler version 2.5.15
 
+### Install ruby from homebrew (macOS)
+
+`brew update`
+`brew install ruby-build`
+`brew install rbenv`
+
+Already installed ? Upgrade:
+
+`brew upgrade rbenv ruby-build`
+
+Install ruby version:
+
+`rbenv install 3.4.1`
+`rbenv global 3.4.1`
+`rbenv init`
+
+Restart terminal 
+`source ~/.zshrc`
+
+Check ruby version 
+`ruby -v`
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [arm64-darwin24]
+
+For bundler :
+
+Update bundler
+```bash
+$ gem install bundler
+$ gem update bundler
+$ bundler -v
+Bundler version 2.6.8
+```
+
 ### jekyll gems related :
 `gem install jekyll -v 3.9.3`
-`gem install bundler`
-`gem update bundler`
 `gem pristine --all`
 `gem install kramdown`
 
@@ -94,12 +125,11 @@ bundle install
 `gem list jekyll`
 
 *** LOCAL GEMS ***
-jekyll (3.9.5)
-jekyll-admin (0.11.1)
+jekyll (3.10.0)
 jekyll-avatar (0.8.0)
 jekyll-coffeescript (1.2.2)
 jekyll-commonmark (1.4.0)
-jekyll-commonmark-ghpages (0.4.0)
+jekyll-commonmark-ghpages (0.5.1)
 jekyll-default-layout (0.1.5)
 jekyll-feed (0.17.0)
 jekyll-gist (1.5.0)
@@ -112,7 +142,7 @@ jekyll-readme-index (0.3.0)
 jekyll-redirect-from (0.16.0)
 jekyll-relative-links (0.6.1)
 jekyll-remote-theme (0.4.3)
-jekyll-sass-converter (3.1.0, 3.0.0, 1.5.2)
+jekyll-sass-converter (1.5.2)
 jekyll-seo-tag (2.8.0)
 jekyll-sitemap (1.4.0)
 jekyll-swiss (1.0.0)
@@ -131,7 +161,6 @@ jekyll-theme-tactile (0.2.0)
 jekyll-theme-time-machine (0.2.0)
 jekyll-titles-from-headings (0.5.3)
 jekyll-watch (2.2.1)
-
 
 ## With Docker run local server (needs Docker installed locally)
 
